@@ -4,7 +4,7 @@
 export interface IdTokenPayload {
   iss: string;
   sub: string;
-  aud: string;
+  aud: string | string[];
   exp: number;
   iat: number;
   auth_time?: number;

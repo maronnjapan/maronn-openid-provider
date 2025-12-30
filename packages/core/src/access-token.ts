@@ -4,7 +4,7 @@
 export interface AccessTokenPayload {
   iss: string;
   sub: string;
-  aud: string;
+  aud: string[];
   exp: number;
   iat: number;
   scope?: string;
