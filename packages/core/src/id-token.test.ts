@@ -1,101 +1,101 @@
-import { describe } from 'vitest';
+import { describe, it } from 'vitest';
 
 describe('generateIdToken', () => {
   describe('JWT Structure', () => {
     describe('JOSE Header', () => {
-      describe('alg claim', () => {});
-      describe('kid claim', () => {});
-      describe('typ claim', () => {});
+      it('alg claim', () => {});
+      it('kid claim', () => {});
+      it('typ claim', () => {});
     });
 
-    describe('Payload encoding', () => {});
-    describe('Signature', () => {});
+    it('Payload encoding', () => {});
+    it('Signature', () => {});
   });
 
   describe('Required Claims', () => {
     describe('iss (Issuer)', () => {
-      describe('Valid issuer', () => {});
-      describe('Invalid: iss with query parameters', () => {});
-      describe('Invalid: iss with fragment', () => {});
-      describe('Invalid: iss with trailing slash mismatch', () => {});
-      describe('Invalid: iss with scheme mismatch', () => {});
-      describe('Invalid: missing iss', () => {});
+      it('Valid issuer', () => {});
+      it('Invalid: iss with query parameters', () => {});
+      it('Invalid: iss with fragment', () => {});
+      it('Invalid: iss with trailing slash mismatch', () => {});
+      it('Invalid: iss with scheme mismatch', () => {});
+      it('Invalid: missing iss', () => {});
     });
 
     describe('sub (Subject)', () => {
-      describe('Valid subject', () => {});
-      describe('Invalid: missing sub', () => {});
-      describe('Invalid: sub exceeds 255 ASCII chars', () => {});
+      it('Valid subject', () => {});
+      it('Invalid: missing sub', () => {});
+      it('Invalid: sub exceeds 255 ASCII chars', () => {});
     });
 
     describe('aud (Audience)', () => {
-      describe('Valid: aud as string (client_id)', () => {});
-      describe('Valid: aud as array containing client_id', () => {});
-      describe('Invalid: aud does not contain client_id', () => {});
-      describe('Invalid: missing aud', () => {});
+      it('Valid: aud as string (client_id)', () => {});
+      it('Valid: aud as array containing client_id', () => {});
+      it('Invalid: aud does not contain client_id', () => {});
+      it('Invalid: missing aud', () => {});
     });
 
     describe('exp (Expiration)', () => {
-      describe('Valid: exp in future', () => {});
-      describe('Valid: clock skew tolerance', () => {});
-      describe('Invalid: exp in past', () => {});
-      describe('Invalid: missing exp', () => {});
+      it('Valid: exp in future', () => {});
+      it('Valid: clock skew tolerance', () => {});
+      it('Invalid: exp in past', () => {});
+      it('Invalid: missing exp', () => {});
     });
 
     describe('iat (Issued At)', () => {
-      describe('Valid: iat present', () => {});
-      describe('Invalid: missing iat', () => {});
+      it('Valid: iat present', () => {});
+      it('Invalid: missing iat', () => {});
     });
   });
 
   describe('Conditional Claims', () => {
     describe('nonce', () => {
-      describe('Valid: nonce matches request', () => {});
-      describe('Valid: no nonce in request, no nonce in token', () => {});
-      describe('Invalid: nonce requested but missing', () => {});
-      describe('Invalid: nonce mismatch', () => {});
+      it('Valid: nonce matches request', () => {});
+      it('Valid: no nonce in request, no nonce in token', () => {});
+      it('Invalid: nonce requested but missing', () => {});
+      it('Invalid: nonce mismatch', () => {});
     });
 
     describe('auth_time', () => {
-      describe('Valid: auth_time when max_age requested', () => {});
-      describe('Valid: auth_time when explicitly requested', () => {});
-      describe('Invalid: missing auth_time when required', () => {});
+      it('Valid: auth_time when max_age requested', () => {});
+      it('Valid: auth_time when explicitly requested', () => {});
+      it('Invalid: missing auth_time when required', () => {});
     });
 
     describe('azp (Authorized Party)', () => {
-      describe('Valid: single aud, no azp required', () => {});
-      describe('Valid: multiple aud, azp equals client_id', () => {});
-      describe('Invalid: multiple aud, azp missing', () => {});
-      describe('Invalid: azp does not match client_id', () => {});
+      it('Valid: single aud, no azp required', () => {});
+      it('Valid: multiple aud, azp equals client_id', () => {});
+      it('Invalid: multiple aud, azp missing', () => {});
+      it('Invalid: azp does not match client_id', () => {});
     });
 
     describe('at_hash', () => {
-      describe('Valid: at_hash present (optional for code flow)', () => {});
-      describe('Valid: at_hash calculation correct', () => {});
+      it('Valid: at_hash present (optional for code flow)', () => {});
+      it('Valid: at_hash calculation correct', () => {});
     });
   });
 
   describe('Signature Verification', () => {
     describe('RS256 Algorithm', () => {
-      describe('Valid: signature verifies with public key', () => {});
-      describe('Invalid: signature does not verify', () => {});
-      describe('Invalid: algorithm mismatch', () => {});
-      describe('Invalid: alg is none', () => {});
+      it('Valid: signature verifies with public key', () => {});
+      it('Invalid: signature does not verify', () => {});
+      it('Invalid: algorithm mismatch', () => {});
+      it('Invalid: alg is none', () => {});
     });
 
     describe('Key Management', () => {
-      describe('Valid: retrieve key via kid from JWKS', () => {});
-      describe('Invalid: unknown kid', () => {});
+      it('Valid: retrieve key via kid from JWKS', () => {});
+      it('Invalid: unknown kid', () => {});
     });
   });
 
   describe('Custom Claims', () => {
     describe('Standard profile claims', () => {
-      describe('name claim', () => {});
-      describe('email claim', () => {});
-      describe('email_verified claim', () => {});
+      it('name claim', () => {});
+      it('email claim', () => {});
+      it('email_verified claim', () => {});
     });
 
-    describe('Additional custom claims', () => {});
+    it('Additional custom claims', () => {});
   });
 });
