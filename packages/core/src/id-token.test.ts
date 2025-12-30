@@ -3,99 +3,99 @@ import { describe, it } from 'vitest';
 describe('generateIdToken', () => {
   describe('JWT Structure', () => {
     describe('JOSE Header', () => {
-      it('alg claim', () => {});
-      it('kid claim', () => {});
-      it('typ claim', () => {});
+      it('should set alg claim to RS256', () => {});
+      it('should include kid claim when keyId is provided', () => {});
+      it('should set typ claim to JWT', () => {});
     });
 
-    it('Payload encoding', () => {});
-    it('Signature', () => {});
+    it('should encode payload as Base64URL', () => {});
+    it('should generate valid RS256 signature', () => {});
   });
 
   describe('Required Claims', () => {
     describe('iss (Issuer)', () => {
-      it('Valid issuer', () => {});
-      it('Invalid: iss with query parameters', () => {});
-      it('Invalid: iss with fragment', () => {});
-      it('Invalid: iss with trailing slash mismatch', () => {});
-      it('Invalid: iss with scheme mismatch', () => {});
-      it('Invalid: missing iss', () => {});
+      it('should set iss to match configured issuer', () => {});
+      it('should reject iss with query parameters', () => {});
+      it('should reject iss with fragment', () => {});
+      it('should reject iss with trailing slash mismatch', () => {});
+      it('should reject iss with scheme mismatch (http vs https)', () => {});
+      it('should reject missing iss', () => {});
     });
 
     describe('sub (Subject)', () => {
-      it('Valid subject', () => {});
-      it('Invalid: missing sub', () => {});
-      it('Invalid: sub exceeds 255 ASCII chars', () => {});
+      it('should include valid subject identifier', () => {});
+      it('should reject missing sub', () => {});
+      it('should reject sub exceeding 255 ASCII chars', () => {});
     });
 
     describe('aud (Audience)', () => {
-      it('Valid: aud as string (client_id)', () => {});
-      it('Valid: aud as array containing client_id', () => {});
-      it('Invalid: aud does not contain client_id', () => {});
-      it('Invalid: missing aud', () => {});
+      it('should accept aud as string equal to client_id', () => {});
+      it('should accept aud as array containing client_id', () => {});
+      it('should reject aud not containing client_id', () => {});
+      it('should reject missing aud', () => {});
     });
 
     describe('exp (Expiration)', () => {
-      it('Valid: exp in future', () => {});
-      it('Valid: clock skew tolerance', () => {});
-      it('Invalid: exp in past', () => {});
-      it('Invalid: missing exp', () => {});
+      it('should set exp to future timestamp', () => {});
+      it('should allow small clock skew tolerance', () => {});
+      it('should reject exp in the past', () => {});
+      it('should reject missing exp', () => {});
     });
 
     describe('iat (Issued At)', () => {
-      it('Valid: iat present', () => {});
-      it('Invalid: missing iat', () => {});
+      it('should include iat timestamp', () => {});
+      it('should reject missing iat', () => {});
     });
   });
 
   describe('Conditional Claims', () => {
     describe('nonce', () => {
-      it('Valid: nonce matches request', () => {});
-      it('Valid: no nonce in request, no nonce in token', () => {});
-      it('Invalid: nonce requested but missing', () => {});
-      it('Invalid: nonce mismatch', () => {});
+      it('should include nonce matching the authorization request', () => {});
+      it('should reject when nonce is requested but missing in token', () => {});
+      it('should reject nonce mismatch', () => {});
     });
 
     describe('auth_time', () => {
-      it('Valid: auth_time when max_age requested', () => {});
-      it('Valid: auth_time when explicitly requested', () => {});
-      it('Invalid: missing auth_time when required', () => {});
+      it('should include auth_time when max_age is requested', () => {});
+      it('should include auth_time when explicitly requested as essential', () => {});
+      it('should reject missing auth_time when required', () => {});
     });
 
     describe('azp (Authorized Party)', () => {
-      it('Valid: single aud, no azp required', () => {});
-      it('Valid: multiple aud, azp equals client_id', () => {});
-      it('Invalid: multiple aud, azp missing', () => {});
-      it('Invalid: azp does not match client_id', () => {});
+      it('should omit azp when aud contains single value', () => {});
+      it('should include azp equal to client_id when aud contains multiple values', () => {});
+      it('should reject missing azp when aud has multiple values', () => {});
+      it('should reject azp not matching client_id', () => {});
     });
 
     describe('at_hash', () => {
-      it('Valid: at_hash present (optional for code flow)', () => {});
-      it('Valid: at_hash calculation correct', () => {});
+      it('should include at_hash when access_token is issued (optional for code flow)', () => {});
+      it('should calculate at_hash correctly (left-most half of hash)', () => {});
     });
   });
 
   describe('Signature Verification', () => {
     describe('RS256 Algorithm', () => {
-      it('Valid: signature verifies with public key', () => {});
-      it('Invalid: signature does not verify', () => {});
-      it('Invalid: algorithm mismatch', () => {});
-      it('Invalid: alg is none', () => {});
+      it('should produce signature verifiable with OP public key', () => {});
+      it('should reject invalid signature', () => {});
+      it('should reject algorithm mismatch', () => {});
+      it('should reject alg=none when signature is required', () => {});
     });
 
     describe('Key Management', () => {
-      it('Valid: retrieve key via kid from JWKS', () => {});
-      it('Invalid: unknown kid', () => {});
+      it('should allow key retrieval via kid from JWKS', () => {});
+      it('should reject unknown kid', () => {});
     });
   });
 
   describe('Custom Claims', () => {
-    describe('Standard profile claims', () => {
-      it('name claim', () => {});
-      it('email claim', () => {});
-      it('email_verified claim', () => {});
-    });
+    // Standard profile claims (profile scope) - OIDC Core Section 5.4
+    // These are standardized claims that require specific handling
+    it('should include name claim when profile scope is requested', () => {});
+    it('should include email claim when email scope is requested', () => {});
+    it('should include email_verified claim when email scope is requested', () => {});
 
-    it('Additional custom claims', () => {});
+    // Additional custom claims for extensibility
+    it('should allow additional custom claims in payload', () => {});
   });
 });

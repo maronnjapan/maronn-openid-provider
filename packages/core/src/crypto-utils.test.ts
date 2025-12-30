@@ -1,38 +1,38 @@
 import { describe, it } from 'vitest';
 
 describe('stringToArrayBuffer', () => {
-  it('Valid conversion', () => {});
-  it('UTF-8 characters', () => {});
-  it('Empty string', () => {});
+  it('should convert a string to ArrayBuffer', () => {});
+  it('should handle UTF-8 characters correctly', () => {});
+  it('should handle empty string', () => {});
 });
 
 describe('arrayBufferToBase64Url', () => {
-  it('Valid conversion to Base64URL', () => {});
+  it('should convert ArrayBuffer to Base64URL format', () => {});
   describe('Base64URL format compliance', () => {
-    it('No plus (+) characters', () => {});
-    it('No slash (/) characters', () => {});
-    it('No padding (=) characters', () => {});
+    it('should not contain plus (+) characters', () => {});
+    it('should not contain slash (/) characters', () => {});
+    it('should not contain padding (=) characters', () => {});
   });
-  it('Empty buffer', () => {});
-  it('Different inputs produce different outputs', () => {});
+  it('should handle empty buffer', () => {});
+  it('should produce different outputs for different inputs', () => {});
 });
 
 describe('sha256', () => {
-  it('Valid hash generation', () => {});
-  it('Consistent output for same input', () => {});
-  it('Different outputs for different inputs', () => {});
-  it('Empty string', () => {});
-  it('UTF-8 characters', () => {});
+  it('should generate a valid SHA-256 hash', () => {});
+  it('should produce consistent output for the same input', () => {});
+  it('should produce different outputs for different inputs', () => {});
+  it('should handle empty string', () => {});
+  it('should handle UTF-8 characters correctly', () => {});
   describe('PKCE compliance', () => {
-    it('Known code_verifier hash', () => {});
+    it('should produce known hash for code_verifier (RFC 7636 example)', () => {});
   });
 });
 
 describe('sign', () => {
-  it('Valid signature generation', () => {});
-  it('Signature verification', () => {});
-  it('RS256 algorithm', () => {});
-  it('Different data produces different signatures', () => {});
-  it('Empty string', () => {});
-  it('UTF-8 characters', () => {});
+  it('should generate a valid signature using RS256', () => {});
+  it('should produce verifiable signature with corresponding public key', () => {});
+  it('should use RS256 algorithm', () => {});
+  it('should produce different signatures for different data', () => {});
+  it('should handle empty string', () => {});
+  it('should handle UTF-8 characters correctly', () => {});
 });
