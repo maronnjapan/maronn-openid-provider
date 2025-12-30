@@ -3,11 +3,9 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   test: {
     // Test environment
-    // 'node': Node.js環境（Web標準API + Node.js APIが使える）
-    // 'edge-runtime': Edge Runtime環境（Web標準APIのみ、より厳密）
-    // Web標準のみを使用する場合はedge-runtimeを推奨しますが、
-    // 追加パッケージ（@edge-runtime/vm）が必要です
-    environment: 'node',
+    // Edge Runtime環境（Web標準APIのみ、Node.js APIは使用不可）
+    // Cloudflare Workers、Vercel Edge等と同等の環境
+    environment: 'edge-runtime',
 
     // Globals (optional, for describe/it/expect without imports)
     globals: false,
