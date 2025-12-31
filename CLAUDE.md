@@ -17,6 +17,58 @@ OpenID Connect Conformance Profiles v3.0のBasic OpenID Providerを準拠満た�
 - devDependenciesは任意の外部ライブラリを使用してもよい
 - t_wada が言っている方法でテスト駆動開発を行うこと
 
+## テストコードの書き方
+
+### テストケースの命名規則
+
+テストケースは以下のルールに従って記述すること：
+
+1. **テストケース名は「should + 動詞」形式で記述する**
+   - ❌ 悪い例: `it('alg claim', () => {})`
+   - ✅ 良い例: `it('should set alg claim to RS256', () => {})`
+
+2. **何をテストするのか、主語と動詞で明確にする**
+   - テストケースを読んだだけで、何を検証するのかが分かるようにする
+   - 実装の意図が明確になるように記述する
+
+3. **テスト構造は以下の階層で構成する**
+   - **トップレベル**: 関数名の `describe`
+   - **中間レベル**: テストカテゴリの `describe`（省略可）
+   - **最下層**: 具体的なテストケースの `it`
+
+### テストケース記述例
+
+```typescript
+describe('generateIdToken', () => {
+  describe('JOSE Header', () => {
+    it('should set alg claim to RS256', () => {});
+    it('should include kid claim when keyId is provided', () => {});
+    it('should set typ claim to JWT', () => {});
+  });
+
+  describe('Required Claims', () => {
+    it('should include iss matching configured issuer', () => {});
+    it('should reject missing iss', () => {});
+  });
+});
+```
+
+### コメントの記述
+
+- 標準化されたクレームや特別な理由がある場合は、コメントで理由を明記する
+- 仕様書のセクション番号を参照する場合は、コメントに記載する
+
+```typescript
+// Standard profile claims (profile scope) - OIDC Core Section 5.4
+// These are standardized claims that require specific handling
+it('should include name claim when profile scope is requested', () => {});
+```
+
+### 実装不可能なテストケースの扱い
+
+- 関数単体では実装できないテストケース（外部依存が必要なもの）は記述しない
+- 例: リクエスト情報が必要なテストは、統合テストで記述する
+
 ## コマンド
 
 ```bash
