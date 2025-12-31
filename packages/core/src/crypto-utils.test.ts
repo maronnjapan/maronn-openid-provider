@@ -70,3 +70,37 @@ describe('importKeyFromJwk', () => {
     it('should work with key pairs exported to JWK', () => {});
   });
 });
+
+describe('extractAlgorithmParams', () => {
+  describe('RSASSA-PKCS1-v1_5 Algorithm', () => {
+    it('should extract algorithm params from RS256 key (SHA-256)', () => {});
+    it('should extract algorithm params from RS384 key (SHA-384)', () => {});
+    it('should extract algorithm params from RS512 key (SHA-512)', () => {});
+    it('should return correct algorithm name (RSASSA-PKCS1-v1_5)', () => {});
+  });
+
+  describe('RSA-PSS Algorithm', () => {
+    it('should extract algorithm params from PS256 key (SHA-256)', () => {});
+    it('should extract algorithm params from PS384 key (SHA-384)', () => {});
+    it('should extract algorithm params from PS512 key (SHA-512)', () => {});
+    it('should return correct algorithm name (RSA-PSS)', () => {});
+  });
+
+  describe('Algorithm Validation', () => {
+    it('should reject unsupported algorithm (RSA-OAEP)', () => {});
+    it('should reject weak hash algorithm (SHA-1)', () => {});
+    it('should reject non-RSA key types', () => {});
+  });
+
+  describe('Hash Algorithm Detection', () => {
+    it('should correctly identify SHA-256 hash', () => {});
+    it('should correctly identify SHA-384 hash', () => {});
+    it('should correctly identify SHA-512 hash', () => {});
+  });
+
+  describe('Return Value Structure', () => {
+    it('should return object with name property', () => {});
+    it('should return object with hash property', () => {});
+    it('should return RsaHashedImportParams compatible structure', () => {});
+  });
+});

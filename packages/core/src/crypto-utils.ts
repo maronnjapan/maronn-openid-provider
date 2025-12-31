@@ -54,3 +54,14 @@ export async function importKeyFromJwk(
 ): Promise<CryptoKey> {
   throw new Error('Not implemented');
 }
+
+/**
+ * CryptoKeyからRsaHashedImportParamsを導出する
+ * 安全なアルゴリズム（RSASSA-PKCS1-v1_5, RSA-PSS）のみサポート
+ * @param key CryptoKey
+ * @returns RsaHashedImportParams
+ * @throws サポートされていないアルゴリズムの場合
+ */
+export function extractAlgorithmParams(key: CryptoKey): RsaHashedImportParams {
+  throw new Error('Not implemented');
+}
