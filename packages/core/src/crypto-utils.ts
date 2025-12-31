@@ -38,14 +38,16 @@ export function stringToArrayBuffer(str: string): ArrayBuffer {
 /**
  * JWK（JSON Web Key）形式の文字列をCryptoKeyに変換する
  * @param jwkString JWK形式の文字列
- * @param algorithm アルゴリズム指定（デフォルト: RS256用）
+ * @param algorithm アルゴリズム指定（デフォルト: RS256用 RSASSA-PKCS1-v1_5 with SHA-256）
+ *                  - RSA: RSASSA-PKCS1-v1_5, RSA-PSS
+ *                  - ECDSA: ES256 (P-256), ES384 (P-384), ES512 (P-521)
  * @param extractable キーをエクスポート可能にするか（デフォルト: true）
  * @param keyUsages キーの用途（デフォルト: ['sign'] for private, ['verify'] for public）
  * @returns CryptoKey
  */
 export async function importKeyFromJwk(
   jwkString: string,
-  algorithm: RsaHashedImportParams = {
+  algorithm: RsaHashedImportParams | EcKeyImportParams = {
     name: 'RSASSA-PKCS1-v1_5',
     hash: 'SHA-256',
   },
@@ -56,12 +58,14 @@ export async function importKeyFromJwk(
 }
 
 /**
- * CryptoKeyからRsaHashedImportParamsを導出する
- * 安全なアルゴリズム（RSASSA-PKCS1-v1_5, RSA-PSS）のみサポート
+ * CryptoKeyからアルゴリズムパラメータを導出する
+ * 安全なアルゴリズムのみサポート:
+ * - RSA: RSASSA-PKCS1-v1_5, RSA-PSS (SHA-256/384/512)
+ * - ECDSA: P-256, P-384, P-521 (SHA-256/384/512)
  * @param key CryptoKey
- * @returns RsaHashedImportParams
+ * @returns RsaHashedImportParams | EcKeyImportParams
  * @throws サポートされていないアルゴリズムの場合
  */
-export function extractAlgorithmParams(key: CryptoKey): RsaHashedImportParams {
+export function extractAlgorithmParams(key: CryptoKey): RsaHashedImportParams | EcKeyImportParams {
   throw new Error('Not implemented');
 }

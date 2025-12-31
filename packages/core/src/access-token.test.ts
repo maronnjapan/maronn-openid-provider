@@ -3,13 +3,29 @@ import { describe, it } from 'vitest';
 describe('generateAccessToken', () => {
   describe('JWT Structure', () => {
     describe('JOSE Header', () => {
-      it('should set alg claim to RS256', () => {});
+      describe('RSA Algorithms', () => {
+        it('should set alg claim to RS256 for RSASSA-PKCS1-v1_5 with SHA-256', () => {});
+        it('should set alg claim to RS384 for RSASSA-PKCS1-v1_5 with SHA-384', () => {});
+        it('should set alg claim to RS512 for RSASSA-PKCS1-v1_5 with SHA-512', () => {});
+        it('should set alg claim to PS256 for RSA-PSS with SHA-256', () => {});
+      });
+
+      describe('ECDSA Algorithms', () => {
+        it('should set alg claim to ES256 for ECDSA with P-256 curve', () => {});
+        it('should set alg claim to ES384 for ECDSA with P-384 curve', () => {});
+        it('should set alg claim to ES512 for ECDSA with P-521 curve', () => {});
+      });
+
       it('should include kid claim when keyId is provided', () => {});
       it('should set typ claim to JWT', () => {});
     });
 
     it('should encode payload as Base64URL', () => {});
-    it('should generate valid RS256 signature', () => {});
+
+    describe('Signature Generation', () => {
+      it('should generate valid RS256 signature', () => {});
+      it('should generate valid ES256 signature', () => {});
+    });
   });
 
   describe('Required Claims', () => {

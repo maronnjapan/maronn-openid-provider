@@ -25,7 +25,11 @@ export interface GenerateIdTokenOptions {
 }
 
 /**
- * IDトークンを生成する（JWT形式、RS256署名）
+ * IDトークンを生成する（JWT形式）
+ * サポートする署名アルゴリズム:
+ * - RSA: RS256, RS384, RS512 (RSASSA-PKCS1-v1_5)
+ * - RSA: PS256, PS384, PS512 (RSA-PSS)
+ * - ECDSA: ES256 (P-256), ES384 (P-384), ES512 (P-521)
  * @param options ID Token生成のオプション
  * @returns 生成されたID Token（JWT形式）
  */
