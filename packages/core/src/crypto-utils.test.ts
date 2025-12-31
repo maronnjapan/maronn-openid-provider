@@ -36,3 +36,37 @@ describe('sign', () => {
   it('should handle empty string', () => {});
   it('should handle UTF-8 characters correctly', () => {});
 });
+
+describe('importKeyFromJwk', () => {
+  describe('Private Key Import', () => {
+    it('should import RSA private key from JWK string', () => {});
+    it('should set correct algorithm (RSASSA-PKCS1-v1_5 with SHA-256)', () => {});
+    it('should set key type to private', () => {});
+    it('should allow key to be extractable by default', () => {});
+    it('should set key usages to sign for private key', () => {});
+  });
+
+  describe('Public Key Import', () => {
+    it('should import RSA public key from JWK string', () => {});
+    it('should set key type to public', () => {});
+    it('should set key usages to verify for public key', () => {});
+  });
+
+  describe('Key Validation', () => {
+    it('should reject invalid JSON string', () => {});
+    it('should reject JWK with missing required fields', () => {});
+    it('should reject JWK with invalid key type', () => {});
+  });
+
+  describe('Custom Parameters', () => {
+    it('should accept custom algorithm parameters', () => {});
+    it('should accept custom extractable flag', () => {});
+    it('should accept custom key usages', () => {});
+  });
+
+  describe('Interoperability', () => {
+    it('should import key that can be used for signing', () => {});
+    it('should import key that can be used for verification', () => {});
+    it('should work with key pairs exported to JWK', () => {});
+  });
+});

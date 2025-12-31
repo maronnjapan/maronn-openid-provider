@@ -34,3 +34,23 @@ export function arrayBufferToBase64Url(buffer: ArrayBuffer): string {
 export function stringToArrayBuffer(str: string): ArrayBuffer {
   throw new Error('Not implemented');
 }
+
+/**
+ * JWK（JSON Web Key）形式の文字列をCryptoKeyに変換する
+ * @param jwkString JWK形式の文字列
+ * @param algorithm アルゴリズム指定（デフォルト: RS256用）
+ * @param extractable キーをエクスポート可能にするか（デフォルト: true）
+ * @param keyUsages キーの用途（デフォルト: ['sign'] for private, ['verify'] for public）
+ * @returns CryptoKey
+ */
+export async function importKeyFromJwk(
+  jwkString: string,
+  algorithm: RsaHashedImportParams = {
+    name: 'RSASSA-PKCS1-v1_5',
+    hash: 'SHA-256',
+  },
+  extractable = true,
+  keyUsages?: KeyUsage[]
+): Promise<CryptoKey> {
+  throw new Error('Not implemented');
+}
