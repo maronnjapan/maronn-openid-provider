@@ -39,7 +39,12 @@ export function stringToArrayBuffer(str: string): ArrayBuffer {
  * JWK（JSON Web Key）形式の文字列をCryptoKeyに変換する
  * @param jwkString JWK形式の文字列
  * @param algorithm アルゴリズム指定（デフォルト: RS256用 RSASSA-PKCS1-v1_5 with SHA-256）
- *                  - RSA: RSASSA-PKCS1-v1_5, RSA-PSS
+ *                  サポートするアルゴリズム:
+ *                  - RSA: RSASSA-PKCS1-v1_5 (RS256/RS384/RS512)
+ *                    ※ OpenID Connect Core 1.0でRS256は必須アルゴリズム（OIDC Core Section 15.1）
+ *                    ※ 適切に実装されている場合、実用的な攻撃は知られていない
+ *                  - RSA: RSA-PSS (PS256/PS384/PS512)
+ *                    ※ より新しく、安全性の証明がより強固なアルゴリズム
  *                  - ECDSA: ES256 (P-256), ES384 (P-384), ES512 (P-521)
  * @param extractable キーをエクスポート可能にするか（デフォルト: true）
  * @param keyUsages キーの用途（デフォルト: ['sign'] for private, ['verify'] for public）
@@ -59,8 +64,11 @@ export async function importKeyFromJwk(
 
 /**
  * CryptoKeyからアルゴリズムパラメータを導出する
- * 安全なアルゴリズムのみサポート:
- * - RSA: RSASSA-PKCS1-v1_5, RSA-PSS (SHA-256/384/512)
+ * サポートする安全なアルゴリズム:
+ * - RSA: RSASSA-PKCS1-v1_5 (SHA-256/384/512)
+ *   ※ OpenID Connect Core 1.0でRS256は必須（OIDC Core Section 15.1）
+ * - RSA: RSA-PSS (SHA-256/384/512)
+ *   ※ RSASSA-PKCS1-v1_5よりも安全性の証明が強固
  * - ECDSA: P-256, P-384, P-521 (SHA-256/384/512)
  * @param key CryptoKey
  * @returns RsaHashedImportParams | EcKeyImportParams
